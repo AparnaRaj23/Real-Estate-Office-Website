@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Transactions</title>
+        <link rel="stylesheet" href="/stylesheets/office.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <style>
+            tr{
+                background-color: white;
+            }
+            .wrap {
+            background-image: url("https://images.pexels.com/photos/2501965/pexels-photo-2501965.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-repeat: no-repeat;
+            background-size: 100% 145%;
+        }
+        .box1 {
+            background-image: url("https://images.pexels.com/photos/2501965/pexels-photo-2501965.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-repeat: no-repeat;
+            background-size: 100% 145%;
+        }
+        .card {
+            background-image: url("https://images.pexels.com/photos/2501965/pexels-photo-2501965.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-repeat: no-repeat;
+            background-size: 100% 145%;
+        }
+        body {
+            background-image: url("https://images.pexels.com/photos/2501965/pexels-photo-2501965.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-repeat: no-repeat;
+            background-size: 100% 145%;
+        }
+        .form-group {
+          font-weight: bold;
+        }
+        .btn {
+          background-color: seagreen;
+        }
+        </style>
+    </head>
+    <body>
+       
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Agent</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/home/dashboard">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active"><p class="nav-link">Welcome : <%= user.Firstname %> <%= user.Lastname %></p></li>
+                  <li class="nav-item active"><p class="nav-link">Email: <%= user.Email_ID %></p></li>
+                  <li class="nav-item active"><p class="nav-link">Contact: <%= user.Phone_Number %></p></li>
+                  <li class="nav-item active"><a class="nav-link" href="/home/logout">Logout</a></li>
+                  
+                      
+                </ul>
+              </div>
+          </nav>
+            
+           
+            
+                
+                <table style="width:90%; height: 200px; overflow-y: auto; margin :auto;   border-spacing:0 15px;   box-shadow: 1px 1px 10px 1px; border-collapse: collapse;">
+                    <%
+                    if(flag === 1 ){ %>
+
+                        <div class="main"  style="margin : 50px auto 0 auto; width: 100%; height: auto; text-align: center; height: 200px; ">
+                        <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %></b></div>
+                        <br>
+                        <form action= "/agent/prop_tran/sale" method="POST" style=" height:70px">
+                                <label for="min" style="margin-left: 10px;">Mininum Price</label>
+                                <input type="text" name="min_price" id="min"  style="border-radius: 4px; width: 100px;">
+                                <label for="max" style="margin-left: 20px;">Maximum Price</label>
+                                <input type="text" name="max_price" id="max" style="border-radius: 4px;width: 100px;">
+                                <label for="date" style="margin-left: 20px;">Sale Date</label>
+                                <input type="text" name="S_date" id="date" style="border-radius: 4px; ">
+                                <label for="bhk" style="margin-left: 20px; " >Bedroom</label>
+                                <input type="number" name="Bedroom" id="bhk" style="border-radius: 4px; width: 50px;">
+                                <label for="bid" style="margin-left: 20px; " >Buyer ID</label>
+                                <input type="number" name="B_ID" id="bid" style="border-radius: 4px; width: 50px;">
+                                <label for="address" style="margin-left: 20px; ">Address</label>
+                                <input type="text" name="Address" id="address" style="margin-right: 20px;border-radius: 4px;">
+                                <input type="submit" style="padding :5px; background-color: seagreen; color :white; border-radius: 10px; ">
+                        </form>
+                        
+                            
+                        <tr style="background-color: seagreen; color: white; height: 40px; opacity: 70%; "> 
+                            <th style="width: 134px;">Tran. ID</th>
+                            <th style="width: 134px;">Prop. ID</th>
+                            <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 134px;">Buyer ID</th>
+                            <th style="width: 400px; overflow:hidden">Address</th>
+                            <th style="width: 134px;">Bedroom</th>
+                            <th style="width: 154px;">Selling Price</th>
+                            <th style="width: 134px;">Sale Date</th>
+                       </tr>
+                       <br>
+                    <%
+                    if(userData.length!=0){
+                    var i=1;
+                    userData.forEach(function(data){
+                    %>
+
+                    <tr>
+                        <tr>
+                            <td><%=data.TS_ID %></td>
+                            <td><%=data.P_ID %></td>
+                            <td><%=data.ID %></td>
+                            <td><a href="/office/profile/b<%=data.B_ID%>"><%=data.B_ID %></a></td>
+                            <td><%=data.Address %></td>
+                            <td><%=data.Bedroom %></td>
+                            <td><%=data.Sell_price %></td>
+                            <td><%=data.S_date%></td>
+                           
+                        </tr>
+                    </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="8">No Data Found</td>
+                    </tr>
+                    <% } } %>
+                   
+                    <%
+                    if(flag === 2 ){   %>
+                        <div class="main"  style="margin : 50px auto 0 auto; width: 100%; height: auto; text-align: center; height: 200px; ">
+                        <div style="width: 100%; text-align: center; height: 50px; padding-top: 10px; font-size: 23px;"><b><%= tit %></b></div>
+                        
+            
+
+                      <br>
+                      <form action= "/agent/prop_tran/rent" method="POST" style=" height:70px">
+                        <label for="min" style="margin-left: 10px;">Mininum Price</label>
+                        <input type="text" name="min_price" id="min"  style="border-radius: 4px; width: 100px;">
+                        <label for="max" style="margin-left: 20px;">Maximum Price</label>
+                        <input type="text" name="max_price" id="max" style="border-radius: 4px;width: 100px;">
+                        <label for="date" style="margin-left: 20px;">Start Date</label>
+                        <input type="text" name="Start_Date" id="date" style="border-radius: 4px; ">
+                        <label for="bhk" style="margin-left: 20px; " >Bedroom</label>
+                        <input type="number" name="Bedroom" id="bhk" style="border-radius: 4px; width: 50px;">
+                        <label for="bid" style="margin-left: 20px; " >Buyer ID</label>
+                        <input type="number" name="B_ID" id="bid" style="border-radius: 4px; width: 50px;">
+                        <label for="address" style="margin-left: 20px; ">Address</label>
+                        <input type="text" name="Address" id="address" style="margin-right: 20px;border-radius: 4px;">
+                        <input type="submit" style="padding :5px; background-color: seagreen; color :white; border-radius: 10px; ">
+                     </form>
+                      <br> 
+
+                        <tr style="background-color: seagreen; color: white; height: 40px; opacity: 70%; "> 
+                            <th style="width: 134px;">Tran. ID</th>
+                            <th style="width: 134px;">Prop. ID</th>
+                            <th style="width: 134px;">Agent ID</th>
+                            <th style="width: 134px;">Buyer ID</th>
+                            <th style="width: 400px; overflow:hidden">Address</th>
+                            <th style="width: 134px;">Bedroom</th>
+                            <th style="width: 154px;">Rent</th>
+                            <th style="width: 134px;">Start Date</th>
+                            <th style="width: 134px;">End Date</th>
+                       </tr>
+                   
+                    <%
+                    if(userData.length!=0){
+                    var i=1;
+                    userData.forEach(function(data){
+                    %>
+
+                    <tr>
+                        <td><%=data.TR_ID %></td>
+                        <td><%=data.P_ID %></td>
+                        <td><%=data.ID %></td>
+                        <td><a href="/office/profile/b<%=data.B_ID%>"><%=data.B_ID%></a></td>
+                        <td><%=data.Address %></td>
+                        <td><%=data.Bedroom %></td>
+                        <td><%=data.Rent %></td>
+                        <td><%=data.Start_Date%></td>
+                        <td><%=data.END_DATE%></td>
+                    </tr>
+
+                    <%  i++;}) %>
+                    <% } else{ %>
+                    <tr>
+                        <td colspan="9">No Data Found</td>
+                    </tr>
+                    <% } } %>
+
+
+                </table>
+                <br><br>
+            </div>
+
+            
+    </body>
+</html>
